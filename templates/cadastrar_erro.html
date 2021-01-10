@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang=”pt-br”>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="../static/signin.css" rel="stylesheet">
+    <title>Meu Planejamento</title>
+    
+    
+
+  </head>
+  
+
+    <body class="text-center">
+        <form class="form-signin" action="/cadastrar" method="post">
+            <div class="alert alert-danger" role="alert">
+                Usuário já existe!
+              </div>
+      <h1 class="h3 mb-3 font-weight-normal">Cadastre-se</h1>
+      <label for="nome" class="sr-only">Usuário</label>
+      <input type="text" name="nome" class="form-control" placeholder="Usuário" required>
+      <label for="senha1" class="sr-only">Senha</label>
+      <input type="password" id="senha1" name="senha1" onkeyup="typing()" ' class="form-control" placeholder="Senha" required>
+      <label for="senha2" class="sr-only">Repita a senha</label>
+      <input type="password" id="senha2" name="senha2" onkeyup="typing()"  class="form-control" placeholder="Repita a senha" required>
+      <button class="btn btn-lg btn-primary btn-block" id="enviar" type="submit">Cadastrar</button>
+      <div id="message">
+        <p id="msg" class="invalid">A senha deve conter no mínimo <b>8 dígitos</b></p>
+        <p id="msg2" class="invalid">Verifique se as senhas estão iguais</p>
+      </div>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+    </form>
+        
+    <script>
+      var psw1 = document.getElementById("senha1");
+      var psw2 = document.getElementById("senha2");
+      var text = document.getElementById("msg");
+   
+      // When the user clicks outside of the password field, hide the message box
+      psw1.onblur = function() {
+        document.getElementById("msg").style.visibility = "hidden";
+      }
+
+      // verifica os requisitos de tamanho da senha e dá feedback do input ao usuario
+      function typing(){
+        // mostra a mensagem de tamanho mínimo até que o requisito seja atendido
+        if (psw1.value.length < 8) {
+          document.getElementById("msg").style.visibility = "visible";
+        }
+        else if(psw1.value.length >= 8 && psw2.value != psw1.value) {
+          
+         
+          document.getElementById("msg2").style.visibility = "visible";
+          //document.getElementById("msg").style.visibility = "visible";
+        }
+        else{
+          document.getElementById('msg').style.visibility = 'hidden';
+          document.getElementById('msg2').style.visibility = 'hidden';
+        }
+        // desabilita o botão até que o tamanho minimo seja atendido
+        if((psw1.value.length >= 8) && (psw2.value.length >= 8)) { 
+          if (psw1.value == psw2.value) {
+            document.getElementById('enviar').disabled = false; 
+          }
+            
+        } 
+        else{
+          document.getElementById('enviar').disabled = true;
+        }
+        
+    }
+
+      </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

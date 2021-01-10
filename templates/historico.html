@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Meu Planejamento</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:-50px">
+  <h1>Meu Planejamento</h1>
+  <p>Seu melhor amigo na preparação para Concursos Públicos</p> 
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/index">Início</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/disciplina">Cadastrar disciplina</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="/historico">Histórico</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>Tempo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for valores in dados %}
+                    <tr>
+                        <td>{{ valores[0] }}</td>
+                        <td>{{ valores[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Meu Planejamento</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:-50px">
+  <h1>Meu Planejamento</h1>
+  <p>Seu melhor amigo na preparação para Concursos Públicos</p> 
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="/index">Início</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/disciplina">Cadastrar disciplina</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/historico">Histórico</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid" style="margin-top:30px">
+  <div class="row">
+    <div class="col-5">
+      <form action="/index" method="POST" name="disciplina">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Selecione uma disciplina</label>
+          <select class="form-control" name="discipline" id="disciplina" style="width: 256px">
+            <option disabled selected value="">Disciplina</option>
+            {% for values in disciplinas %}
+                <option value="{{ values }}"> {{ values }} </option>
+              {% endfor %}     
+          </select>
+        </div>
+      </form>
+    </div>
+    
+    <div class="col-5" style="margin-top:100px">
+      <form action="/index" method="POST" name="myForm" autocomplete="off">
+      <div class="form-group">
+        <label for="usr">Tempo</label>
+        <input type="text" class="form-control" onkeyup="digitando()" onkeypress="return event.keyCode != 13;" id="tempo" name="time" style="width: 120px">
+        <button type="button" id="start" disabled="true" class="btn btn-lg btn-dark" onclick="timer()" style="margin-top:10px;">Começar</button>
+        <button type="button" id="pause" class="btn btn-lg btn-dark" onclick="pausar()" style="display: none; margin-top:10px;">Pausar</button>
+      </div>
+    </form>
+      <script>
+        var now = 0;
+        var hours = 0;
+        var minutes = 0;
+        var seconds = 0;
+        var x;
+        function timer(){
+          clearInterval(x);
+          var tempo = document.getElementById("tempo").value;
+          // para a chamada anterior quando clica no botao novamente
+          
+          document.getElementById("start").style.display = "none";
+          document.getElementById("start").style.display = "none";
+          document.getElementById("pause").style.display = "inline";
+          document.getElementById("parar").style.display = "inline";
+          document.getElementById("tempo").style.pointerEvents = "none";
+          document.getElementById("tempo").style.backgroundColor = "#3234"
+        // Update the count down every 1 second
+          x = setInterval(function() {
+          var countDownDate = tempo;
+
+          // Get today's date and time
+          now = now + 1;
+          // Find the distance between now and the count down date
+          var distance = (countDownDate * 60) - now;
+            
+          // Time calculations for hours, minutes and seconds
+          hours = Math.floor((distance % (60 * 60 * 24)) / ( 60 * 60));
+          minutes = Math.floor((distance % (60 * 60)) / 60);
+          seconds = distance % 60;
+            
+          // Output the result in an element with id="demo"
+          document.getElementById("demo").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+            
+          
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+          }
+        },1000);
+        }
+        
+        function parar(){
+          now = 0;
+          hours = 0;
+          minutes = 0;
+          seconds = 0;
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "";
+          document.getElementById("tempo").style.pointerEvents = "auto";
+          document.getElementById("tempo").style.backgroundColor = "#ffffff"
+          document.getElementById("pause").style.display = "none";
+          document.getElementById("parar").style.display = "none";
+          document.getElementById("start").style.display = "inline";
+          document.getElementById("gravar").style.display = "none";
+
+
+        }
+        function pausar(){
+          document.getElementById("pause").style.display = "none";
+          document.getElementById("gravar").style.display = "inline";
+          document.getElementById("start").style.display = "inline";
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+          
+        }
+        function continuar(){
+          document.getElementById("pausar").style.display = "inline";
+          document.getElementById("continuar").style.display = "none";
+          timer();
+        }
+        function gravar(){
+          var ddl = document.getElementById("disciplina");
+          var selectedValue = ddl.value;
+          if (selectedValue == "")
+          {
+            alert("Selecione uma disciplina");
+          }
+          else
+          {
+          var tempo = document.getElementById("tempo");
+          var disciplina = document.getElementById('disciplina');
+          
+          var totalSecondsBefore = parseInt(document.getElementById("tempo").value);
+          totalSecondsBefore *= 60;
+          var totalSeconds = (hours * 60 * 60) + (minutes * 60) + seconds;
+
+          var diff = totalSecondsBefore - totalSeconds;
+         
+         // transforma segundos no formato h:m:s
+          var horas = Math.floor(diff / 3600);
+          diff %= 3600;
+          var minutos = Math.floor(diff / 60);
+          var segundos = diff % 60;
+          
+          var tempoEdisciplina = horas + "h " + minutos + "m " + segundos + "s" + ":" + disciplina.value;
+          
+
+          tempo.value = tempoEdisciplina;
+
+
+          //submete o segundo formulário
+          document.forms[1].submit();
+          }
+        }
+        function digitando(){
+          var valor = document.getElementById("tempo").value;
+            if(!isNaN(valor) && valor.length >= 1)
+            { 
+              document.getElementById("start").disabled = false;
+            }
+            else
+            {
+              document.getElementById("start").disabled = true;
+            }
+        }
+        </script> 
+    </div>
+    <div class="col-2">
+      <p id="demo"></p>
+      <button type="button" class="btn btn-outline-danger text-dark" id="parar" style="display: none;" onclick="parar()">Parar</button>
+      <button type="button" class="btn btn-outline-success" id="gravar" style="display: none;" onclick="gravar()">Gravar</button>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
