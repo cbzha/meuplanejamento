@@ -1,0 +1,16 @@
+site para planejar o estudo para concursos:
+1 - terá cadastro de usuários;
+2 - login de usuários;
+3 - cadastro de disciplinas;
+4 - um timer (pomodoro) programável
+5 - planejamento de tempo de estudo por um determinado período
+6 - planajamento de tempo de estudo semanal
+7 - planejamento de tempo de estudo diário
+8 - após atingir um determinado período, mostra o deficit ou saldo de horas estudadas;
+9 - planejamento do número de questões resolvidas por um determinado perído, semanal, mensal, anual
+10 - geração de gráfico de horas estudadas por cada disciplina;
+11 - o usuário poderá criar um novo projeto com base em um concurso que ele quer estudar
+10 - cada projeto terá um nome, quantidade de horas, disciplinas, saldo, deficit
+11 - terá a opção de montar o ciclo de estudo. a ferramenta guiará o usuário selecionando a displina a ser estudada no dia corrente.
+12 - o app poderá manter a mesma disciplina selecionada até que ela seja estudada ou pular para a do próximo dia. fica a escolha do usuário.
+13 - as horas poderão ser contabilizadas com base no timer. poderão ser editadas pelo usuário a qualqer momento.
