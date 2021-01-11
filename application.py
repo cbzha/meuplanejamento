@@ -6,7 +6,7 @@ from helpers import login_required
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="cbpb050592",
+  password="yourpassword",
   database="meuplanejamento"
 )
 
